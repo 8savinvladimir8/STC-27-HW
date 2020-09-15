@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -24,7 +25,7 @@ public class PersonArray {
      * Метод генерирует объекты Person и заполняет ими массив.
      * @return массив сгенерированных объектов Person.
      */
-    public Person[] generateArray() {
+    public void generateArray() {
         for (int i = 0; i < persons.length; i++) {
             int age = randomizer.nextInt(100) + 1;
 
@@ -76,6 +77,18 @@ public class PersonArray {
 
             persons[i] = new Person(age, sex, name);
         }
-        return persons;
+    }
+
+    /**
+     * Метод возвращает массив сгенерированных объектов Person.
+     * @return массив сгенерированных объектов Person.
+     */
+    public Person[] getPersons() {
+        if (persons[0] == null) {
+            log.error("Список персон пуст.");
+        } else {
+            return Arrays.copyOf(persons, persons.length);
+        }
+        return new Person[0];
     }
 }

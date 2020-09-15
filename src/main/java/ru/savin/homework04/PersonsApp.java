@@ -16,8 +16,10 @@ public class PersonsApp {
     static final Logger log = LogManager.getLogger(PersonsApp.class.getName());
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
+        // при запуске создадим небольшой массив "по умолчанию"
         PersonArray personArray = new PersonArray(10);;
-        Person[] persons = personArray.generateArray();
+        personArray.generateArray();
+        Person[] persons = personArray.getPersons();
         PersonComparator personComparator = new PersonComparator();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -36,13 +38,14 @@ public class PersonsApp {
                         log.info("Введите целочисленное значение - размер создаваемого массива:");
                         line = br.readLine();
                         personArray = new PersonArray(Integer.parseInt(line));
-                        persons = personArray.generateArray();
+                        personArray.generateArray();
+                        persons = personArray.getPersons();
                         showPersons(persons);
                         break;
                     case "2":
                         PersonSorter arraysSorting = new PersonSortingWithArrays();
                         long startTime = System.nanoTime();
-                        persons = arraysSorting.sort(persons, personComparator);
+                        persons = arraysSorting.sort(personArray.getPersons(), personComparator);
                         long endTime = System.nanoTime();
                         long duration = (endTime - startTime);
                         showPersons(persons);
@@ -51,11 +54,11 @@ public class PersonsApp {
                     case "3":
                         PersonSorter bubbleSorting = new PersonBubbleSorting();
                         startTime = System.nanoTime();
-                        persons = bubbleSorting.sort(persons, personComparator);
+                        persons = bubbleSorting.sort(personArray.getPersons(), personComparator);
                         endTime = System.nanoTime();
                         duration = (endTime - startTime);
                         showPersons(persons);
-                        log.info("Сортровка заняла: {} наносекунд разделить на 1000000 для миллисекунд", duration);
+                        log.info("Сортровка заняла: {} наносекунд (разделить на 1000000 для миллисекунд)", duration);
                         break;
                     default:
                         log.error("Введён некорректный номер операции");
