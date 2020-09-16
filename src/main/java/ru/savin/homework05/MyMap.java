@@ -77,7 +77,7 @@ public class MyMap<K, V> {
 
     /**
      * Метод убирает "разрывы" в массиве при удалении элементов ("уплотняет" элементы массива).
-     * @param start
+     * @param start ячейка массива, с которой начинаем "уплотнение" значений.
      */
     private void condenseArray(int start) {
         for (int i = start; i < size; i++) {
