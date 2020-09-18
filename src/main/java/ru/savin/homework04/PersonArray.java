@@ -85,10 +85,13 @@ public class PersonArray {
      */
     public Person[] getPersons() {
         if (persons[0] == null) {
-            log.error("Список персон пуст.");
-        } else {
-            return Arrays.copyOf(persons, persons.length);
+            try {
+                throw new PersonsEmptyListException("Список персон пуст.");
+            } catch (PersonsEmptyListException e) {
+                log.error(e.fillInStackTrace());
+            }
         }
-        return new Person[0];
+
+        return Arrays.copyOf(persons, persons.length);
     }
 }

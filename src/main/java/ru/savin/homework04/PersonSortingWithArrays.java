@@ -22,11 +22,15 @@ public class PersonSortingWithArrays implements PersonSorter {
     @Override
     public Person[] sort(Person[] persons, Comparator<Person> personComparator) {
         if (persons[0] == null) {
-            log.error("Список персон пуст.");
-        } else {
-            log.info("Отсортированный список персон:");
-            Arrays.sort(persons, personComparator);
+            try {
+                throw new PersonsEmptyListException("Список персон пуст.");
+            } catch (PersonsEmptyListException e) {
+                log.error(e.fillInStackTrace());
+            }
         }
+
+        log.info("Отсортированный список персон:");
+        Arrays.sort(persons, personComparator);
 
         return persons;
     }

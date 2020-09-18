@@ -76,13 +76,17 @@ public class PersonsApp {
      */
     private static void showPersons(Person[] persons) {
         if (persons[0] == null) {
-            log.error("Список персон пуст.");
-        } else {
-            log.info("");
-            log.info("Список персон:");
-            for (Person person : persons) {
-                log.info(person);
+            try {
+                throw new PersonsEmptyListException("Список персон пуст.");
+            } catch (PersonsEmptyListException e) {
+                log.error(e.fillInStackTrace());
             }
+        }
+
+        log.info("");
+        log.info("Список персон:");
+        for (Person person : persons) {
+            log.info(person);
         }
     }
 }
