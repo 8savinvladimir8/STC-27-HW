@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс {@code ServerApp} представляет собой простой HTTP сервер, обрабатывающий HTTP-запросы.
@@ -75,18 +77,17 @@ public class ServerApp {
          * @return строка с именами папок и файлов, разделённых символами переноса строки.
          */
         public static String getDirsFiles(String filePath) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("\n");
+            List<String> pathList = new ArrayList<>();
+            pathList.add("\n");
+
             // Чтение полного списка папок и файлов каталога
             File[] filePathList = new File(filePath).listFiles();
-
             if (filePathList != null) {
                 for (File file : filePathList) {
-                    sb.append(file.getName()).append("\n");
+                    pathList.add(file.getName());
                 }
             }
-
-            return sb.toString();
+            return String.join(System.lineSeparator(), pathList);
         }
     }
 }
