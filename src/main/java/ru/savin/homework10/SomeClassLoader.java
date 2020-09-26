@@ -14,7 +14,7 @@ public class SomeClassLoader extends ClassLoader {
      * @return экземпляр Class, созданный из данных указанного класса.
      */
     @Override
-    protected Class<?> findClass(String name) {
+    public Class<?> findClass(String name) {
         byte[] bytes = new byte[0];
         try {
             bytes = Files.readAllBytes(Paths.get("SomeClass.class"));
